@@ -1,0 +1,46 @@
+#!/bin/bash
+
+rm -rvf *-50k.json
+mkdir -p build
+
+if [ ! -f build/nxparroquias.shp ]; then
+  unzip -od build build/SHP.zip nxparroquias.shp nxparroquias.dbf
+  chmod a-x build/nxparroquias.*
+fi
+
+if [ ! -f build/nxcantones.shp ]; then
+  unzip -od build build/SHP.zip nxcantones.shp nxcantones.dbf
+  chmod a-x build/nxcantones.*
+fi
+
+if [ ! -f build/nxprovincias.shp ]; then
+  unzip -od build build/SHP.zip nxprovincias.shp nxprovincias.dbf
+  chmod a-x build/nxprovincias.*
+fi
+
+geo2topo -q 1e5 -n parishes=<( \
+    shp2json -n build/nxparroquias.shp \
+      | ndjson-filter '!/000$/.test(d.properties.DPA_PARROQ)' \
+      | ndjson-map '(d.id = d.properties.DPA_PARROQ, delete d.properties, d)') \
+  | toposimplify -f -s 1e-7 \
+  | topomerge cantons=parishes -k 'd.id.slice(0, 4)' \
+  | topomerge provinces=parishes -k 'd.id.slice(0, 2)' \
+  | node ./properties.js \
+  > parishes-50k.json
+
+geo2topo -q 1e5 -n cantons=<( \
+    shp2json -n build/nxcantones.shp \
+      | ndjson-filter '!/000$/.test(d.properties.DPA_CANTON)' \
+      | ndjson-map '(d.id = d.properties.DPA_CANTON, d.properties = {name: d.properties.DPA_DESCAN}, d)') \
+  | toposimplify -f -s 1e-7 \
+  | topomerge provinces=cantons -k 'd.id.slice(0, 2)'\
+  | node ./propertiesDep.js \
+  > cantons-50k.json
+
+geo2topo -q 1e5 -n provinces=<( \
+    shp2json -n build/nxprovincias.shp \
+      | ndjson-filter '!/000$/.test(d.properties.DPA_PROVIN)' \
+      | ndjson-map '(d.id = d.properties.DPA_PROVIN, d.properties = {name: d.properties.DPA_DESPRO}, d)') \
+  | toposimplify -f -s 1e-7 \
+  > provinces-50k.json
+
