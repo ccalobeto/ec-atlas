@@ -2,8 +2,8 @@ const shapefile = require("shapefile");
 
 Promise.all([
   parseInput(),
-  shapefile.read("build/nxcantones.shp"),
-  shapefile.read("build/nxprovincias.shp")
+  shapefile.read("build/SHP/nxcantones.shp"),
+  shapefile.read("build/SHP/nxprovincias.shp")
 ]).then(output);
 
 function parseInput() {

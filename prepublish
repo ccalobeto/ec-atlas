@@ -3,23 +3,24 @@
 rm -rvf *-50k.json
 mkdir -p build
 
-if [ ! -f build/nxparroquias.shp ]; then
-  unzip -od build build/SHP.zip nxparroquias.shp nxparroquias.dbf
-  chmod a-x build/nxparroquias.*
+# important: check the file structure of the zip file to addapt to you
+if [ ! -f build/SHP/nxparroquias.shp ]; then
+  unzip -od build build/SHP.zip SHP/nxparroquias.shp SHP/nxparroquias.dbf
+  chmod a-x build/SHP/nxparroquias.*
 fi
 
 if [ ! -f build/nxcantones.shp ]; then
-  unzip -od build build/SHP.zip nxcantones.shp nxcantones.dbf
-  chmod a-x build/nxcantones.*
+  unzip -od build build/SHP.zip SHP/nxcantones.shp SHP/nxcantones.dbf
+  chmod a-x build/SHP/nxcantones.*
 fi
 
 if [ ! -f build/nxprovincias.shp ]; then
-  unzip -od build build/SHP.zip nxprovincias.shp nxprovincias.dbf
-  chmod a-x build/nxprovincias.*
+  unzip -od build build/SHP.zip SHP/nxprovincias.shp SHP/nxprovincias.dbf
+  chmod a-x build/SHP/nxprovincias.*
 fi
 
 geo2topo -q 1e5 -n parishes=<( \
-    shp2json -n build/nxparroquias.shp \
+    shp2json -n build/SHP/nxparroquias.shp \
       | ndjson-filter '!/000$/.test(d.properties.DPA_PARROQ)' \
       | ndjson-map '(d.id = d.properties.DPA_PARROQ, delete d.properties, d)') \
   | toposimplify -f -s 1e-7 \
@@ -29,7 +30,7 @@ geo2topo -q 1e5 -n parishes=<( \
   > parishes-50k.json
 
 geo2topo -q 1e5 -n cantons=<( \
-    shp2json -n build/nxcantones.shp \
+    shp2json -n build/SHP/nxcantones.shp \
       | ndjson-filter '!/000$/.test(d.properties.DPA_CANTON)' \
       | ndjson-map '(d.id = d.properties.DPA_CANTON, d.properties = {name: d.properties.DPA_DESCAN}, d)') \
   | toposimplify -f -s 1e-7 \
@@ -38,7 +39,7 @@ geo2topo -q 1e5 -n cantons=<( \
   > cantons-50k.json
 
 geo2topo -q 1e5 -n provinces=<( \
-    shp2json -n build/nxprovincias.shp \
+    shp2json -n build/SHP/nxprovincias.shp \
       | ndjson-filter '!/000$/.test(d.properties.DPA_PROVIN)' \
       | ndjson-map '(d.id = d.properties.DPA_PROVIN, d.properties = {name: d.properties.DPA_DESPRO}, d)') \
   | toposimplify -f -s 1e-7 \
