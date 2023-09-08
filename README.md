@@ -1,10 +1,10 @@
 # Ecuador Atlas TopoJSON
 
-This repository provides a convenient redistribution of the [Ecuador cartographic boundary shapefiles](https://www.ecuadorencifras.gob.ec/documentos/web-inec/Geografia_Estadistica/Micrositio_geoportal/index.html), 2022 edition as vector data.
+This repository provides a convenient redistribution of the [Ecuador cartographic boundary shapefiles](https://www.ecuadorencifras.gob.ec/documentos/web-inec/Geografia_Estadistica/Micrositio_geoportal/index.html), 2015 edition as vector data.
 
 ### Usage
 
-Yo can use the geojson and topojson files in your map on a webpage.
+You can use the geojson and topojson files in your map on a webpage.
 
 
 
@@ -12,7 +12,7 @@ Yo can use the geojson and topojson files in your map on a webpage.
 
 Clone or download the repo and start a terminal. Since there isn't a web service to directly Download the vector files, download them manually and create and move them into the `build` folder. Then run `npm run prepublishOnly` to transform the zip files into topojson files.
 
-If you need to make further adjustments (projection, simplification, quantization) you can change the `prepublish` config and run `npm run prepublishOnly` again.
+If you need to make further adjustments (projection, simplification, quantization) you can change the `prepublish` config file and run `npm run prepublishOnly` again.
 
 ### Reference
 
@@ -26,49 +26,49 @@ Removes information by reducing the precision of each coordinate. Set to `1e5` b
 
 ## File Reference
 
-<a href="#districts-100k.json" name="districts-100k.json">#</a> <b>districts-100k.json</b> · [Download](https://cdn.jsdelivr.net/npm/pe-atlas@1.0.1/districts-100k.json "Source")
+<a href="#parishes-50k.json" name="parishes-50k.json">#</a> <b>parishes-50k.json</b> · [Download](https://cdn.jsdelivr.net/npm/pe-atlas@1.0.1/parishes-50k.json "Source")
 
-A [TopoJSON file](https://github.com/topojson/topojson-specification/blob/master/README.md#21-topology-objects) containing three objects: districts, provinces and departments corresponding to [Perú cartographic boundary shapefiles](https://www.geogpsperu.com/).
+A [TopoJSON file](https://github.com/topojson/topojson-specification/blob/master/README.md#21-topology-objects) containing three objects: parishes, cantons and provinces corresponding to [Ecuador cartographic boundary shapefiles](https://www.ecuadorencifras.gob.ec/documentos/web-inec/Geografia_Estadistica/Micrositio_geoportal/index.html).
 The geometry is quantized and simplified, but not projected.
 
 
-<a href="#provinces-100k.json" name="provinces-100k.json">#</a> <b>provinces-100k.json</b> · [Download](https://cdn.jsdelivr.net/npm/pe-atlas@1.0.1/provinces-100k.json "Source")
+<a href="#cantons-50k.json" name="cantons-50k.json">#</a> <b>cantons-50k.json</b> · [Download](https://cdn.jsdelivr.net/npm/pe-atlas@1.0.1/cantons-50k.json "Source")
 
-A [TopoJSON file](https://github.com/topojson/topojson-specification/blob/master/README.md#21-topology-objects) containing the geometry collections <i>provinces</i> and <i>departments</i>. The geometry is quantized and simplified, but not projected. 
+A [TopoJSON file](https://github.com/topojson/topojson-specification/blob/master/README.md#21-topology-objects) containing the geometry collections <i>cantons</i> and <i>provinces</i>. The geometry is quantized and simplified, but not projected. 
 
 
-<a href="#departments-100k.json" name="departments-10k.json">#</a> <b>departments-100k.json</b> · [Download](https://cdn.jsdelivr.net/npm/pe-atlas@1.0.1/departments-100k.json "Source")
+<a href="#provinces-50k.json" name="provinces-50k.json">#</a> <b>provinces-50k.json</b> · [Download](https://cdn.jsdelivr.net/npm/pe-atlas@1.0.1/departments-100k.json "Source")
 
-A [TopoJSON file](https://github.com/topojson/topojson-specification/blob/master/README.md#21-topology-objects) containing the geometry collection <i>departments</i>. The geometry is quantized and simplified, but not projected. 
+A [TopoJSON file](https://github.com/topojson/topojson-specification/blob/master/README.md#21-topology-objects) containing the geometry collection <i>provinces</i>. The geometry is quantized and simplified, but not projected. 
 
-<a href="#districts" name="districts">#</a> *pe*.objects.<b>districts</b>
+<a href="#parishes" name="parishes">#</a> *pe*.objects.<b>parishes</b>
 
-<img src="img/districts.png" width="480" height="300">
+<img src="img/parishes-50k.png" width="480" height="300">
 
-Each district has two properties:
+Each parish has two properties:
 
-* *district.id* - the five-digit [UBIGEO code](https://es.wikipedia.org/wiki/Ubigeo), such as `"100902"`
-* *district.properties.name* - the district name, such as `"CODO DEL POZUZO"`
+* *parish.id* - the six-digit [DPA_PARROQ code](https://www.ecuadorencifras.gob.ec/documentos/web-inec/Poblacion_y_Demografia/CPV_aplicativos/modulo_cpv/dpa_.xls), such as `"010152"`
+* *parish.properties.name* - the district name, such as `"CUMBE"`
 
-The first two digits of the district UBIGEO code is the UBIGEO department code.
+The first two digits of the parish DPA_PARROQ code is the province code.
 
-<a href="#provinces" name="provinces">#</a> *pe*.objects.<b>provinces</b>
+<a href="#cantons" name="cantons">#</a> *pe*.objects.<b>cantons</b>
 
-<img src="img/provinces.png" width="480" height="300">
+<img src="img/cantons-50k.png" width="480" height="300">
 
 Each province has two properties:
 
-* *province.id* - the four-digit [province code](https://es.wikipedia.org/wiki/Ubigeo), such as `"0101"`
-* *province.proprties.name* - the province name, such as `"CHACHAPOYAS"`
+* *canton.id* - the four-digit [canton code](https://www.ecuadorencifras.gob.ec/documentos/web-inec/Poblacion_y_Demografia/CPV_aplicativos/modulo_cpv/dpa_.xls), such as `"0102"`
+* *canton.properties.name* - the province name, such as `"GIRON"`
 
-<a href="#departments" name="departments">#</a> *pe*.objects.<b>departments</b>
+<a href="#provinces" name="provinces">#</a> *pe*.objects.<b>provinces</b>
 
-<img src="img/departments.png" width="480" height="300">
+<img src="img/provinces-50k.png" width="480" height="300">
 
-The department has two properties:
+The provinces has two properties:
 
-* *department.id* - the string `"01"`
-* *department.name* - the string `"AMAZONAS"`
+* *province.id* - the string `"01"`
+* *province.name* - the string `"AZUAY"`
 
 ### Inspiration
 
