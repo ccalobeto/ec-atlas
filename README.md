@@ -1,6 +1,6 @@
 # Ecuador Atlas TopoJSON
 
-This repository provides a convenient redistribution of the [Ecuador cartographic boundary shapefiles](https://www.ecuadorencifras.gob.ec/documentos/web-inec/Geografia_Estadistica/Micrositio_geoportal/index.html), 2015 edition as vector data.
+This repository provides a convenient redistribution of the [Ecuador cartographic boundary shapefiles](https://www.ecuadorencifras.gob.ec/documentos/web-inec/Geografia_Estadistica/Micrositio_geoportal/index.html), 2015 edition as vector data. Split SHP.zip into 4 more zip files: nxparroquias.zip, nxcantones.zip, nxprovincias.zip and periferia.zip.
 
 ### Usage
 
@@ -14,6 +14,8 @@ Clone or download the repo and start a terminal. Since there isn't a web service
 
 If you need to make further adjustments (projection, simplification, quantization) you can change the `prepublish` config file and run `npm run prepublishOnly` again.
 
+> Temporarily you can reduce the size of these topojson files even more using [mapshaper](https://mapshaper.org/). For these project i simplify to 6%.
+
 ### Reference
 
 <a href="#simplification" name="simplification">#</a> <i>simplification</i>
@@ -26,18 +28,18 @@ Removes information by reducing the precision of each coordinate. Set to `1e5` b
 
 ## File Reference
 
-<a href="#parishes-50k.json" name="parishes-50k.json">#</a> <b>parishes-50k.json</b> · [Download](https://cdn.jsdelivr.net/npm/pe-atlas@1.0.1/parishes-50k.json "Source")
+<a href="#parishes-50k.json" name="parishes-50k.json">#</a> <b>parishes-50k.json</b> · [Download](https://cdn.jsdelivr.net/npm/ec-atlas@0.0.1/parishes-50k.json "Source")
 
 A [TopoJSON file](https://github.com/topojson/topojson-specification/blob/master/README.md#21-topology-objects) containing three objects: parishes, cantons and provinces corresponding to [Ecuador cartographic boundary shapefiles](https://www.ecuadorencifras.gob.ec/documentos/web-inec/Geografia_Estadistica/Micrositio_geoportal/index.html).
 The geometry is quantized and simplified, but not projected.
 
 
-<a href="#cantons-50k.json" name="cantons-50k.json">#</a> <b>cantons-50k.json</b> · [Download](https://cdn.jsdelivr.net/npm/pe-atlas@1.0.1/cantons-50k.json "Source")
+<a href="#cantons-50k.json" name="cantons-50k.json">#</a> <b>cantons-50k.json</b> · [Download](https://cdn.jsdelivr.net/npm/ec-atlas@0.0.1/cantons-50k.json "Source")
 
 A [TopoJSON file](https://github.com/topojson/topojson-specification/blob/master/README.md#21-topology-objects) containing the geometry collections <i>cantons</i> and <i>provinces</i>. The geometry is quantized and simplified, but not projected. 
 
 
-<a href="#provinces-50k.json" name="provinces-50k.json">#</a> <b>provinces-50k.json</b> · [Download](https://cdn.jsdelivr.net/npm/pe-atlas@1.0.1/departments-100k.json "Source")
+<a href="#provinces-50k.json" name="provinces-50k.json">#</a> <b>provinces-50k.json</b> · [Download](https://cdn.jsdelivr.net/npm/ec-atlas@0.0.1/provinces-50k.json "Source")
 
 A [TopoJSON file](https://github.com/topojson/topojson-specification/blob/master/README.md#21-topology-objects) containing the geometry collection <i>provinces</i>. The geometry is quantized and simplified, but not projected. 
 

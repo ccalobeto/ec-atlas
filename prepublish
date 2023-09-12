@@ -3,45 +3,47 @@
 rm -rvf *-50k.json
 mkdir -p build
 
+quantization=1e5
+simplification=1e-7
 # important: check the file structure of the zip file to addapt to you
-if [ ! -f build/SHP/nxparroquias.shp ]; then
-  unzip -od build build/SHP.zip SHP/nxparroquias.shp SHP/nxparroquias.dbf
-  chmod a-x build/SHP/nxparroquias.*
+if [ ! -f build/nxparroquias.shp ]; then
+  unzip -od build nxparroquias.zip nxparroquias.shp nxparroquias.dbf
+  chmod a-x build/nxparroquias.*
 fi
 
 if [ ! -f build/nxcantones.shp ]; then
-  unzip -od build build/SHP.zip SHP/nxcantones.shp SHP/nxcantones.dbf
-  chmod a-x build/SHP/nxcantones.*
+  unzip -od build nxcantones.zip nxcantones.shp nxcantones.dbf
+  chmod a-x build/nxcantones.*
 fi
 
 if [ ! -f build/nxprovincias.shp ]; then
-  unzip -od build build/SHP.zip SHP/nxprovincias.shp SHP/nxprovincias.dbf
-  chmod a-x build/SHP/nxprovincias.*
+  unzip -od build nxprovincias.zip nxprovincias.shp nxprovincias.dbf
+  chmod a-x build/nxprovincias.*
 fi
 
-geo2topo -q 1e5 -n parishes=<( \
-    shp2json -n build/SHP/nxparroquias.shp \
+geo2topo -q $quantization -n parishes=<( \
+    shp2json -n build/nxparroquias.shp \
       | ndjson-filter '!/000$/.test(d.properties.DPA_PARROQ)' \
       | ndjson-map '(d.id = d.properties.DPA_PARROQ, delete d.properties, d)') \
-  | toposimplify -f -s 1e-7 \
+  | toposimplify -f -s $simplification \
   | topomerge cantons=parishes -k 'd.id.slice(0, 4)' \
   | topomerge provinces=parishes -k 'd.id.slice(0, 2)' \
   | node ./properties.js \
   > parishes-50k.json
 
-geo2topo -q 1e5 -n cantons=<( \
-    shp2json -n build/SHP/nxcantones.shp \
+geo2topo -q $quantization -n cantons=<( \
+    shp2json -n build/nxcantones.shp \
       | ndjson-filter '!/000$/.test(d.properties.DPA_CANTON)' \
       | ndjson-map '(d.id = d.properties.DPA_CANTON, d.properties = {name: d.properties.DPA_DESCAN}, d)') \
-  | toposimplify -f -s 1e-7 \
+  | toposimplify -f -s $simplification \
   | topomerge provinces=cantons -k 'd.id.slice(0, 2)'\
   | node ./propertiesDep.js \
   > cantons-50k.json
 
-geo2topo -q 1e5 -n provinces=<( \
-    shp2json -n build/SHP/nxprovincias.shp \
+geo2topo -q $quantization -n provinces=<( \
+    shp2json -n build/nxprovincias.shp \
       | ndjson-filter '!/000$/.test(d.properties.DPA_PROVIN)' \
       | ndjson-map '(d.id = d.properties.DPA_PROVIN, d.properties = {name: d.properties.DPA_DESPRO}, d)') \
-  | toposimplify -f -s 1e-7 \
+  | toposimplify -f -s $simplification \
   > provinces-50k.json
 
