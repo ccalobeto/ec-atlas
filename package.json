@@ -1,6 +1,6 @@
 {
   "name": "ec-atlas",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Pre-built TopoJSON from Ecuador",
   "license": "MIT",
   "keywords": [
