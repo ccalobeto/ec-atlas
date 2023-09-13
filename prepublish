@@ -30,6 +30,7 @@ geo2topo -q $quantization -n parishes=<( \
   | topomerge provinces=parishes -k 'd.id.slice(0, 2)' \
   | node ./properties.js \
   > parishes-50k.json
+mapshaper parishes-50k.json -simplify dp 6% -o force parishes-50k.json
 
 geo2topo -q $quantization -n cantons=<( \
     shp2json -n build/nxcantones.shp \
@@ -39,6 +40,7 @@ geo2topo -q $quantization -n cantons=<( \
   | topomerge provinces=cantons -k 'd.id.slice(0, 2)'\
   | node ./propertiesDep.js \
   > cantons-50k.json
+mapshaper cantons-50k.json -simplify dp 6% -o force cantons-50k.json
 
 geo2topo -q $quantization -n provinces=<( \
     shp2json -n build/nxprovincias.shp \
@@ -46,4 +48,5 @@ geo2topo -q $quantization -n provinces=<( \
       | ndjson-map '(d.id = d.properties.DPA_PROVIN, d.properties = {name: d.properties.DPA_DESPRO}, d)') \
   | toposimplify -f -s $simplification \
   > provinces-50k.json
+mapshaper provinces-50k.json -simplify dp 6% -o force provinces-50k.json
 
