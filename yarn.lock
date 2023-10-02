@@ -2,6 +2,44 @@
 # yarn lockfile v1
 
 
+"@json2csv/cli@^7.0.3":
+  "integrity" "sha512-oP5vru3bo86gmlcUWNUnPSfKU5MYte6CWBRNLxteLgHmrX0WlBU44l35Ukmv3qoRKulppCXVAdxcvcLyZ9gvVg=="
+  "resolved" "https://registry.npmjs.org/@json2csv/cli/-/cli-7.0.3.tgz"
+  "version" "7.0.3"
+  dependencies:
+    "@json2csv/formatters" "^7.0.3"
+    "@json2csv/node" "^7.0.3"
+    "@json2csv/transforms" "^7.0.3"
+    "commander" "^11.0.0"
+
+"@json2csv/formatters@^7.0.3":
+  "integrity" "sha512-QLTpBNmNxGDAQNALkWwPdnyJ7IdXHQ0Motzog4fZOKK2ozpxckl6vwhWNBxbQs/25Zhp7bLS4J6ILu/hh0en6w=="
+  "resolved" "https://registry.npmjs.org/@json2csv/formatters/-/formatters-7.0.3.tgz"
+  "version" "7.0.3"
+
+"@json2csv/node@^7.0.3":
+  "integrity" "sha512-lmIprTZLw5UgetRXfkYlzHhs5juXFmeDR03Ao9ahOim7GYqsqMMCDe7SZGSXHYBLNVu5f2ClsUMOKLhHJtW7Zg=="
+  "resolved" "https://registry.npmjs.org/@json2csv/node/-/node-7.0.3.tgz"
+  "version" "7.0.3"
+  dependencies:
+    "@json2csv/plainjs" "^7.0.3"
+
+"@json2csv/plainjs@^7.0.3":
+  "integrity" "sha512-AEpEdeSu8o64Sdf7Xoy7BM4MyfZToN7oxxleXJ6u7v3h0V0hKdNIw7i4kQ08wiIe7lcJBhS3JRyEPKX6k2AsjA=="
+  "resolved" "https://registry.npmjs.org/@json2csv/plainjs/-/plainjs-7.0.3.tgz"
+  "version" "7.0.3"
+  dependencies:
+    "@json2csv/formatters" "^7.0.3"
+    "@streamparser/json" "^0.0.17"
+    "lodash.get" "^4.4.2"
+
+"@json2csv/transforms@^7.0.3":
+  "integrity" "sha512-6IvE2NXcFB48nutRa1nmbnJEJWlR846xHggI0WIuZzX2yMKJjEnNuJYPVpq7pelm2zQqFh1uoE3M7xqUleGdDw=="
+  "resolved" "https://registry.npmjs.org/@json2csv/transforms/-/transforms-7.0.3.tgz"
+  "version" "7.0.3"
+  dependencies:
+    "lodash.get" "^4.4.2"
+
 "@msgpackr-extract/msgpackr-extract-darwin-x64@3.0.2":
   "integrity" "sha512-lwriRAHm1Yg4iDf23Oxm9n/t5Zpw1lVnxYU3HnJPTi2lJRkKTrps1KVgvL6m7WvmhYVt/FIsssWay+k45QHeuw=="
   "resolved" "https://registry.npmjs.org/@msgpackr-extract/msgpackr-extract-darwin-x64/-/msgpackr-extract-darwin-x64-3.0.2.tgz"
@@ -11,6 +49,11 @@
   "integrity" "sha512-Y6lprxpPfDxLoUyeNcI/vfxMkeWlTjNFvh73zlxfQtZ8TWIj+rmPY99l5wNFVkHQOAwCzLaBXyxULpbtaMGyHQ=="
   "resolved" "https://registry.npmjs.org/@placemarkio/tokml/-/tokml-0.3.3.tgz"
   "version" "0.3.3"
+
+"@streamparser/json@^0.0.17":
+  "integrity" "sha512-mW54K6CTVJVLwXRB6kSS1xGWPmtTuXAStWnlvtesmcySgtop+eFPWOywBFPpJO4UD173epYsPSP6HSW8kuqN8w=="
+  "resolved" "https://registry.npmjs.org/@streamparser/json/-/json-0.0.17.tgz"
+  "version" "0.0.17"
 
 "@tmcw/togeojson@^5.6.0":
   "integrity" "sha512-2YNrbis3l5kS0XrYwiHEZcGwiRp0MJ5CvwGwtMWp2z2tsVlskeec2qgvKHnF0RCwI5GnjrrBOoKsWfndEnd3LA=="
@@ -110,6 +153,11 @@
   "version" "1.0.8"
   dependencies:
     "delayed-stream" "~1.0.0"
+
+"commander@^11.0.0":
+  "integrity" "sha512-9HMlXtt/BNoYr8ooyjjNRdIilOTkVJXB+GhxMTtOKwk0R4j4lS4NpjuqmRxroBfnfTSHQIHQB7wryHhXarNjmQ=="
+  "resolved" "https://registry.npmjs.org/commander/-/commander-11.0.0.tgz"
+  "version" "11.0.0"
 
 "commander@^2.11.0", "commander@2":
   "integrity" "sha512-7j2y+40w61zy6YC2iRNpUe/NwhNyoXrYpHMrSunaMG64nRnaf96zO/KMQR4OyN/UnE5KLyEBnKHd4aG3rskjpQ=="
@@ -362,6 +410,11 @@
   "version" "1.1.0"
   dependencies:
     "tsscmp" "1.0.6"
+
+"lodash.get@^4.4.2":
+  "integrity" "sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ=="
+  "resolved" "https://registry.npmjs.org/lodash.get/-/lodash.get-4.4.2.tgz"
+  "version" "4.4.2"
 
 "mapshaper@^0.6.42":
   "integrity" "sha512-EQf9oMCwTlZgnbje49SBhwxMMwjQpV+BjTFbEUyEj0vGckfnCpgeW11scZwR1ZUO05AIMf6pUv9oFWYWwbq1zg=="

@@ -1,10 +1,11 @@
-const shapefile = require("shapefile");
+import {readFileSync} from 'node:fs'
+import * as d3Dsv from 'd3-dsv';
+const csv = readFileSync("build/dictionary.csv", {encoding: 'utf8'})
+const dictionary = d3Dsv.csvParse(csv)
 
 Promise.all([
   parseInput(),
-  shapefile.read("build/nxparroquias.shp"),
-  shapefile.read("build/nxcantones.shp"),
-  shapefile.read("build/nxprovincias.shp")
+  dictionary,
 ]).then(output);
 
 function parseInput() {
@@ -20,31 +21,26 @@ function parseInput() {
   });
 }
 
-function output([topology, parishes, cantons, provinces]) {
-  parishes = new Map(parishes.features.map(d => [d.properties.DPA_PARROQ, d.properties]));
-  cantons = new Map(cantons.features.map(d => [d.properties.DPA_CANTON, d.properties]));
-  // permite agregar el nombre de departamento dentro del topojson 
-  // y dentro de objects.provinces.geometries.properties.name
-  provinces = new Map(provinces.features.map(d => [d.properties.DPA_PROVIN, d.properties]));
-
-  for (const parish of topology.objects.parishes.geometries) {
-    parish.properties = {
-      name: parishes.get(parish.id).DPA_DESPAR
+function output([topology, dictionary]) {
+  const keys = dictionary.columns
+  const dlevel4 = new Map(dictionary.map(d => [d[keys[0]], d[keys[1]]]));
+  const dlevel3 = new Map(dictionary.map(d => [d[keys[2]], d[keys[3]]]));
+  const dlevel2 = new Map(dictionary.map(d => [d[keys[4]], d[keys[5]]]));
+  for (const geometry of topology.objects.level4.geometries) {
+    geometry.properties = {
+      name: dlevel4.get(geometry.id)
     };
   }
-
-  for (const canton of topology.objects.cantons.geometries) {
-    canton.properties = {
-      name: cantons.get(canton.id).DPA_DESCAN
+  for (const geometry of topology.objects.level3.geometries) {
+    geometry.properties = {
+      name: dlevel3.get(geometry.id)
     };
   }
-
-  for (const province of topology.objects.provinces.geometries) {
-    province.properties = {
-      name: provinces.get(province.id).DPA_DESPRO
+  for (const geometry of topology.objects.level2.geometries) {
+    geometry.properties = {
+      name: dlevel2.get(geometry.id)
     };
   }
-
   process.stdout.write(JSON.stringify(topology));
   process.stdout.write("\n");
 }
