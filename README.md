@@ -34,13 +34,13 @@ Removes information by reducing the precision of each coordinate. Set to `1e5` b
 
 ## File Reference
 
-<a href="#ecuador-50k.json" name="ecuador-50k.json">#</a> <b>ecuador-50k.json</b> · [Download](https://cdn.jsdelivr.net/npm/ec-atlas@0.0.2/ecuador-50k.json "Source")
+<a href="#ecuador-50k.json" name="ecuador-50k.json">#</a> <b>ecuador-50k.json</b> · [Download](https://cdn.jsdelivr.net/npm/ec-atlas@0.0.4/ecuador-50k.json "Source")
 
 A [TopoJSON file](https://github.com/topojson/topojson-specification/blob/master/README.md#21-topology-objects) containing 4 levels objects corresponding to [Ecuador cartographic boundary shapefiles](https://www.ecuadorencifras.gob.ec/documentos/web-inec/Geografia_Estadistica/Micrositio_geoportal/index.html).
 The geometry is quantized and simplified, but not projected.
 
 
-<a href="#ecuador-transverse_mercator-50k.json" name="ecuador-transverse_mercator-50k.json.json">#</a> <b>ecuador-transverse_mercator-50k.json</b> · [Download](https://cdn.jsdelivr.net/npm/ec-atlas@0.0.2/ecuador-transverse_mercator-50k.json.json "Source")
+<a href="#ecuador-transverse_mercator-50k.json" name="ecuador-transverse_mercator-50k.json.json">#</a> <b>ecuador-transverse_mercator-50k.json</b> · [Download](https://cdn.jsdelivr.net/npm/ec-atlas@0.0.4/ecuador-transverse_mercator-50k.json "Source")
 
 A [TopoJSON file](https://github.com/topojson/topojson-specification/blob/master/README.md#21-topology-objects) containing 4 levels of geometry. The geometry is quantized and simplified and [projected](https://epsg.io/32717). 
 
