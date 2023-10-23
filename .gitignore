@@ -2,3 +2,5 @@ build/
 node_modules
 *-50k.json
 *.zip
+information/
+data/

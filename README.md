@@ -12,15 +12,26 @@ To align the names of subnational jurisdictions in Ecuador, four levels have bee
 ### Usage
 
 You can use the geojson and topojson files in your map on a webpage.
-Look an example [here](https://observablehq.com/d/5c8d5f19f2c4dfef)
 
+To visualize with d3:
 
+```
+d3
+    .geoIdentity()
+    .reflectY(true)
+    .fitSize([width, height], features)
+```
+
+Or using Plot in observablehq, 
+see an example [here](https://observablehq.com/d/5c8d5f19f2c4dfef)
 
 ## Generating the files
 
 Clone or download the repo and start a terminal. Then run `npm run prepublishOnly` to transform the downloaded zip files into topojson files.
 
 If you need to make further adjustments (projection, simplification, quantization) you can change the `prepublish` config file and run `npm run prepublishOnly` again.
+
+Note: Since the projection (transverse mercator) is already included in the shp source file, keep the projection in the builded topojson file and use the identity projection to visualize it. 
 
 ### Reference
 
@@ -33,14 +44,7 @@ Removes points to reduce the file size. Set to 3% by default.
 Removes information by reducing the precision of each coordinate. Set to `1e5` by default.
 
 ## File Reference
-
-<a href="#ecuador-50k.json" name="ecuador-50k.json">#</a> <b>ecuador-50k.json</b> · [Download](https://cdn.jsdelivr.net/npm/ec-atlas@0.0.4/ecuador-50k.json "Source")
-
-A [TopoJSON file](https://github.com/topojson/topojson-specification/blob/master/README.md#21-topology-objects) containing 4 levels objects corresponding to [Ecuador cartographic boundary shapefiles](https://www.ecuadorencifras.gob.ec/documentos/web-inec/Geografia_Estadistica/Micrositio_geoportal/index.html).
-The geometry is quantized and simplified, but not projected.
-
-
-<a href="#ecuador-transverse_mercator-50k.json" name="ecuador-transverse_mercator-50k.json.json">#</a> <b>ecuador-transverse_mercator-50k.json</b> · [Download](https://cdn.jsdelivr.net/npm/ec-atlas@0.0.4/ecuador-transverse_mercator-50k.json "Source")
+<a href="#ecuador-transverse_mercator-50k.json" name="ecuador-transverse_mercator-50k.json.json">#</a> <b>ecuador-transverse_mercator-50k.json</b> · [Download](https://cdn.jsdelivr.net/npm/ec-atlas@0.0.5/ecuador-transverse_mercator-50k.json "Source")
 
 A [TopoJSON file](https://github.com/topojson/topojson-specification/blob/master/README.md#21-topology-objects) containing 4 levels of geometry. The geometry is quantized and simplified and [projected](https://epsg.io/32717). 
 
