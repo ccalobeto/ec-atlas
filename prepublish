@@ -18,17 +18,15 @@ shp2json -n --encoding UTF-8 build/ecuador.shp \
 dictionary="$(iconv -f ISO8859-1 -t UTF-8 build/dictionary.csv | awk -F "\"*,\"*" -v OFS=',' '{print $1, $2, $5, $6, $7, $8}' | awk '{gsub(/"/,"")};1')"
 echo "$dictionary" > build/dictionary.csv
 
-# the shp file is already projected with the best version of ecuador
-# so do not reproject again and rename the file to express that is already projected 
 geo2topo -q 1e5 -n level4=<( \
-  mapshaper build/ecuador.shp -simplify 3% keep-shapes -clean -o \ format=geojson - \
-    | ndjson-cat \
-    | ndjson-split 'd.features' \
-    | ndjson-map '(d.id = d.properties.DPA_PARROQ, delete d.properties, d)') \
-  | topomerge level3=level4 -k 'd.id.slice(0, 4)'\
-  | topomerge level2=level3 -k 'd.id.slice(0, 2)'\
-  | topomerge level1=level2 \
-  | node ./properties.js \
-  > ecuador-transverse_mercator-50k.json
+mapshaper build/ecuador.shp -proj wgs84 from='+proj=utm +zone=17 +south +datum=WGS84 +units=m +no_defs' -simplify 3% keep-shapes -clean -o \ format=geojson - \
+  | ndjson-cat \
+  | ndjson-split 'd.features' \
+  | ndjson-map '(d.id = d.properties.DPA_PARROQ, delete d.properties, d)') \
+| topomerge level3=level4 -k 'd.id.slice(0, 4)' \
+| topomerge level2=level3 -k 'd.id.slice(0, 2)' \
+| topomerge level1=level2 \
+| node ./properties.js \
+> ecuador-transverse_mercator-50k.json
   
 
