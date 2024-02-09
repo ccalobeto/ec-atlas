@@ -1,5 +1,7 @@
 # Ecuador Atlas TopoJSON
 
+This repo is **deprecated**. See a new version [here](https://github.com/ccalobeto/latam-atlas).
+
 This repository provides a convenient redistribution of the [Ecuador cartographic boundary shapefiles](https://www.ecuadorencifras.gob.ec/documentos/web-inec/Geografia_Estadistica/Micrositio_geoportal/index.html), 2015 edition as vector data. 
 
 To align the names of subnational jurisdictions in Ecuador, four levels have been set:
